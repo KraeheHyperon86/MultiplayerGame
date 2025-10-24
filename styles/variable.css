@@ -1,0 +1,100 @@
+:root {
+  --font-family: 'Georgia', serif;
+  --transform: rotateX(10deg) rotateY(-10deg);
+  --bg-color: #f0f0f0;
+  --box-shadow-big: 10px 10px 0 #000;
+  --box-shadow-small: 5px 5px 0 #000;
+  --border: 2px solid #000;
+  --card-width: 5rem;
+  --card-height: 7rem;
+
+  @media screen and (orientation: landscape) and (height < 400px) {
+    --card-width: 4rem;
+    --card-height: 6rem;
+
+  }
+  @media screen and (orientation: portrait) and (width < 350px) {
+    --card-width: 4.5rem;
+    --card-height: 6.5rem;
+  }
+}
+
+@media screen and (orientation: landscape) and (height < 350px) {
+  #player-deck-wrapper {
+    height: 5rem !important;
+  }
+}
+
+
+html {
+  font-size: clamp(12px, 1.5vw, 18px);
+}
+
+body {
+  background-image: url("../icons/background.jpg");
+  background-size: cover;
+  background-position: center;
+  background-repeat: no-repeat;
+}
+
+.box {
+  background: var(--bg-color);
+  border: var(--border);
+  box-shadow: var(--box-shadow-small);
+  transform: var(--transform);
+  padding: 0.25rem;
+}
+
+.flex-between {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 1rem;
+}
+
+@keyframes rotateHourglass {
+  0% {
+    transform: translate(-50%, -50%) rotate(0deg);
+  }
+  100% {
+    transform: translate(-50%, -50%) rotate(180deg);
+  }
+}
+
+@keyframes bounce {
+  0% {
+    transform: translate(-50%, -50%) scale(1);
+  }
+  50% {
+    transform: translate(-50%, -50%) scale(1.2);
+  }
+  100% {
+    transform: translate(-50%, -50%) scale(1);
+  }
+}
+
+@keyframes scale {
+  0% {
+    transform: scale(1);
+  }
+  50% {
+    transform: scale(1.5);
+  }
+  100% {
+    transform: scale(1);
+  }
+
+}
+
+@keyframes scale-small {
+  0% {
+    transform: scale(1);
+  }
+  50% {
+    transform: scale(1.1);
+  }
+  100% {
+    transform: scale(1);
+  }
+
+}

@@ -1,0 +1,14 @@
+{
+  "name": "",
+  "short_name": "",
+  "description": "",
+  "dir": "auto",
+  "lang": "de-DE",
+  "display": "standalone",
+  "orientation": "portrait-primary",
+  "start_url": "https://",
+  "background_color": "#ffffff",
+  "theme_color": "#222222",
+  "screenshots": []
+    
+}

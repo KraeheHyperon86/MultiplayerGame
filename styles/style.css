@@ -1,0 +1,419 @@
+html {
+  font-size: clamp(12px, 1.5vw, 18px);
+  overscroll-behavior: none;
+  position: fixed;
+  overflow: hidden;
+  min-width: 100vw;
+  min-height: 100vh;
+}
+
+
+* {
+  font-family: var(--font-family);
+}
+
+body {
+  height: 100vh;
+  margin: 0;
+  padding: 0;
+  min-width: 100vw;
+  min-height: 100vh;
+}
+
+
+#game {
+  display: none;
+  height: 100vh;
+  margin: 0;
+  padding: 0;
+  min-width: 100vw;
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: space-between;
+
+  
+
+  .round-end-wrapper {
+    position: absolute;
+    background: rgba(0,0,0,0.3);
+    z-index: 11;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 100vw;
+    height: 100vh;
+
+    #round-end {
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      justify-content: space-evenly;
+      gap: 1rem;
+      padding: 1rem;
+      max-width: 80vw;
+
+      #stichablage-team2  {
+        background-color: rgb(255, 0, 0, 0.5); ;
+      }
+      #stichablage-team1  {
+        background-color: rgb(0, 0, 0, 0.5); ;
+      }
+
+      #stichablage-team2,
+      #stichablage-team1 {
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        flex-wrap: wrap;
+        padding: 1rem;
+        .card-container {
+          display: none;
+          font-size: 1rem !important;
+          width: 4rem;
+          height: 6rem;
+
+        }
+
+      }
+
+      #spielpunkte-team1.scale,
+      #spielpunkte-team2.scale {
+        animation: scale 2s ease-in-out infinite;
+      }
+    }  
+
+  }
+
+
+
+  div.player-wrapper {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-direction: column;
+    gap: 1rem;
+  }
+
+  div.player-info {
+    position: relative;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 1rem;
+    font-size: 1.25rem;
+    background: var(--bg-color);
+    border: var(--border);
+    box-shadow: var(--box-shadow-small);
+    transform: var(--transform);
+    padding: 0.3rem 0.75rem;
+
+
+    &::before {
+      position: absolute;
+      content: "\f254";
+      font-family: "Font Awesome 5 Free";
+      top: 50%;
+      left: -1.5rem;
+      transform: translate(-50%, -50%);
+      visibility: hidden;
+      
+    }
+      &.active::before {
+      visibility: visible;
+      animation: rotateHourglass 2s ease-in-out infinite;
+    }
+
+    & .player-color {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      & > span:not(.kreuz) {
+        display: none;
+      }
+      span {
+        font-size: 1.5rem;
+      }
+      & .kreuz,
+      & .pik {
+        color: black;
+      }
+      & .herz,
+      & .karo {
+        color: red;
+      }
+    }
+  }
+
+
+  div#team-1 div.player-info {
+    color: black;
+  }
+  div#team-2 div.player-info {
+    color: crimson;
+  }
+
+  div#team-1 {
+    & #player-deck-wrapper {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      flex-direction: column;
+      position: relative;
+      height: 10rem;
+      width: 25rem;
+      & .wrapper {
+        position: absolute;
+        top: 0;
+
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+        width: 100%;
+        gap: 5rem;
+        & div#game-info {
+          display: flex;
+          align-items: center;
+          justify-content: space-between;
+          gap: 1rem;
+          font-size: 1.25rem;
+          background: var(--bg-color);
+          border: var(--border);
+          box-shadow: var(--box-shadow-small);
+          transform: var(--transform);
+          padding: 0.3rem 0.75rem;
+          & > div {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 1rem;
+            & span {
+              font-size: 1.5rem;
+              &.point-team-1 {
+                color: black;
+              }
+              &.point-team-2 {
+                color: crimson;
+              }
+            }
+          }
+        }
+      
+      }
+    }
+  }
+
+
+  div#team-1 div.player-wrapper {
+    position: absolute;
+    right: 2rem;
+    top: -2rem;
+    transform: translateY(-100%);
+  }
+
+  @media screen and (width < 450px) {
+    div#team-1 div.player-wrapper {
+      right: 0rem !important;
+    }
+    
+  }
+
+  div#team-2 {
+    display: flex;
+    align-items: center;
+    justify-content: space-evenly;
+    width: 100vw;
+    height: var(--card-height);
+    gap: 3rem;
+    margin-top: 2rem;
+  }
+
+  div#team-1 {
+    position: relative;
+    display: flex;
+    align-items: center;
+    justify-content: space-evenly;
+    width: 90vw;
+  }
+
+  div#player-deck-area {
+    position: absolute;
+    bottom: calc(var(--card-height) * -0.45);
+    
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    & > div.card-container:not(:first-child) {
+      margin-left: -2rem;
+    }
+
+  }
+
+
+  div.back-cards {
+    position: relative;
+    height: var(--card-height);
+    width: var(--card-width);
+    &  div.card-container {
+      position: absolute;
+    }
+
+    & .roundwin-player {
+      position: absolute;
+      left: 50%;
+      top: 50%;
+      transform: translate(-50%, -50%);
+      color: gold;
+      font-size: 1.5rem;
+      opacity: 0;
+      transition: opacity 1s ease-in-out;
+      z-index: 10;
+      background: white;
+      padding: 0.5rem;
+      border-radius: 100%;
+      border: 2px solid gold;
+    }
+  }
+
+
+
+  div.back-cards .roundwin-player.win {
+    animation: bounce 1s ease-in-out infinite;
+    visibility: visible;
+    opacity: 1;
+    transition: opacity 1s ease-in-out;
+  }
+
+
+  div#ablage-bereiche {
+    position: relative;
+    top: -3rem;
+    display: grid;
+
+    grid-template-columns: repeat(2, var(--card-width));
+    grid-template-rows: repeat(2, var(--card-height));
+    gap: 2rem 1.5rem;
+
+    &::after {
+      content: '';
+      position: absolute;
+      width: 100%;
+      height: 0.25rem;
+      background: brown;
+      top: 50%;
+      border-radius: 0.25rem;
+    }
+
+    #player-1 {
+      position: relative;
+
+      div#drop-zone {
+        position: absolute;
+        left: 50%;
+        top: 50%;
+        transform: translate(-50%, -50%);
+        width: var(--card-width);
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        justify-content: center;
+        gap: 1rem;
+        text-align: center;
+        i.scale {
+          animation: scale 1s ease-in-out infinite;
+        }
+      }
+    }
+
+    div.card-ablage {
+
+      border-radius: 0.65rem;
+  
+    }
+
+    div#played-colors {
+      position: absolute;
+      right: -4rem;
+      top: 50%;
+      transform: translateY(-50%);
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      span {
+        position: relative;
+        font-size: 2rem;
+        opacity: 0.3;
+
+        &.scale {
+          animation: scale 1s ease-in-out infinite;
+        }
+      }
+    }
+
+
+
+
+    div#card-bedienen {
+      position: absolute;
+      top: 50%;
+      left: -4rem;
+      transform: translateY(-50%);
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      
+      & div.farben {
+        font-size: 3rem;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        flex-direction: column;
+        > span {
+          display: none;
+        }
+        & .karo, & .herz {
+          color: red;
+        }
+        & .pik, & .kreuz {
+          color: black;
+        }
+        
+      }
+
+      & div.bedienen-icon {
+        display: none;
+        margin-top: -1rem;
+
+        & i {
+          font-size: 2rem;
+        }
+      }
+      
+    }
+  }
+
+  div.card-ablage.team-1  {
+    outline: 2px solid black;
+  }
+  div.card-ablage.team-2  {
+    outline: 2px solid crimson;
+  }
+
+
+} 
+
+body {
+  height: 100vh;
+  margin: 0;
+  padding: 0;
+  min-width: 100vw;
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: space-between;
+
+}

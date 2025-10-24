@@ -1,0 +1,104 @@
+.karo,
+.herz {
+  color: red;
+}
+.pik,
+.kreuz {
+  color: black;
+}
+
+
+div#cross {
+  position: absolute;
+  left: 50%;
+  top: 50%;
+  transform: translate(-50%, -50%);
+  color: red;
+  font-size: 2rem;
+  z-index: 10;
+}
+
+.card-container {
+  perspective: 1000px;
+  width: var(--card-width);
+  height: var(--card-height);
+  box-shadow:  -2px 2px 2px rgba(0,0,0,0.3);
+  padding: 0.65rem;
+  border-radius: 0.65rem;
+  background-color: white;
+  box-sizing: border-box;
+  transition: transform 0.2s ease-in-out;
+  & > * {
+    box-sizing: border-box;
+  }
+  &.card-hover {
+    transform: translateY(-0.5rem);
+    
+  }
+  &.card-hover-main {
+    transform: translateY(-1.5rem);
+  }
+  &.scale {
+    animation: scale-small 2s ease-in-out infinite;
+  }
+
+}
+
+
+.card {
+  display: flex;
+  justify-content: space-between;
+
+
+  font-family: 'Georgia', serif;
+  font-size: 1.25rem;
+
+  & div.top.left {
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-start;
+    align-items: center;
+
+  }
+  & div.bottom.right {
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-end;
+    align-items: center;
+
+  }
+}
+.card.red {
+  color: red;
+}
+.card.black {
+  color: black;
+}
+
+
+.card-flip {
+  width: 100%;
+  height: 100%;
+  position: relative;
+  transform-style: preserve-3d;
+  transition: transform 1s;
+}
+/* .card-container:hover .card-flip {
+  transform: rotateY(180deg);
+} */
+.card-front, .card-back {
+  position: absolute;
+  width: 100%;
+  height: 100%;
+  backface-visibility: hidden;
+  border-radius: 0.65rem;
+}
+.card-back:not(.placeholder) {
+  transform: rotateY(180deg);
+}
+.card-back.red {
+  background: repeating-linear-gradient(45deg, #600, #600 10px, #a00 10px, #a00 20px);
+}
+.card-back.black {
+  background: repeating-linear-gradient(45deg, #000, #000 10px, #333 10px, #333 20px);
+}
