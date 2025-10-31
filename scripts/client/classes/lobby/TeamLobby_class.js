@@ -56,7 +56,7 @@ export class TeamLobby extends Lobby {
 
   async handleJoinLobby() {
 
-    if(this.tryJoinLobby(this.id, this.client)) {
+    if(await this.tryJoinLobby(this.id, this.client)) {
       this.createLobbyRoomUI();
       let lobbyserver = await this.getLobbyFromServer(this.id);
       this.addExistingLobbyMembers(lobbyserver);

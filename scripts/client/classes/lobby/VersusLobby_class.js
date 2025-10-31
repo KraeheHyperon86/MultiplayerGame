@@ -134,7 +134,7 @@ export class VersusLobby extends Lobby {
 
   async handleJoinLobby() {
 
-    if(this.tryJoinLobby(this.id, this.client)) {
+    if(await this.tryJoinLobby(this.id, this.client)) {
       this.createLobbyRoomUI(this.maxPlayers);
       let lobbyserver = await this.getLobbyFromServer(this.id);
       this.addExistingLobbyMembers(lobbyserver);
