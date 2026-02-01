@@ -5,9 +5,6 @@ $session = new Session();
 $db = new MySQL();
 
 
-$gameConfig = $db->selectDB2assoc('SELECT min_players, max_players, teams, teams_total, team_size, port FROM game WHERE name = "'.CONFIG::ROOT.'"')[0];
-
-
 $auth   = Validate::filterRequest("auth", 'string', 'login');
 $lobbyID  = Validate::filterRequest("lobbyID", "string", '');
 
@@ -46,25 +43,13 @@ echo '</script>';
     <link rel="stylesheet" href="./styles/variable.css">
     <link rel="stylesheet" href="./styles/style.css">
     <link rel="stylesheet" href="./styles/lobby.css">
+    <link rel="stylesheet" href="./styles/cards.css">
     <script src="https://kit.fontawesome.com/515d599e21.js" crossorigin="anonymous"></script>
     <script defer src="./scripts/howler.js"></script>
     <script defer src="./scripts/jquery-3.7.1.js"></script>
     <script defer src="https://code.jquery.com/ui/1.13.2/jquery-ui.min.js"></script>
     <script defer src="https://cdnjs.cloudflare.com/ajax/libs/jqueryui-touch-punch/0.2.3/jquery.ui.touch-punch.min.js"></script>
     <script src="https://cdn.socket.io/4.8.1/socket.io.min.js" integrity="sha384-mkQ3/7FUtcGyoppY6bz/PORYoGqOl7/aSUMn2ymDOJcapfS6PHqxhRTMh1RR0Q6+" crossorigin="anonymous"></script>
-    <?php
-      echo '<script>';
-      echo '  const MIN_PLAYERS   = '.$gameConfig['min_players'].';';
-      echo '  const MAX_PLAYERS   = '.$gameConfig['max_players'].';';
-      echo '  const TEAMS         = '.$gameConfig['teams'].';';
-      echo '  const TEAMS_TOTAL   = '.$gameConfig['teams_total'].';';
-      echo '  const TEAM_SIZE     = '.$gameConfig['team_size'].';';
-      echo '  const PORT          = '.$gameConfig['port'].';';
-      echo '  let name            = "'.$name.'";';
-      echo '  let lobbyID         = "'.$lobbyID.'";';
-      echo '  const socket_io_url = "'.Config::SOCKET_IO_URL.'";';
-      echo '</script>';
-    ?>
     <link rel="manifest" href="./manifest.webmanifest">
     <meta name="mobile-web-app-capable" content="yes">
     <meta name="mobile-web-app-capable" content="yes">
@@ -74,7 +59,8 @@ echo '</script>';
     if(!$session->isUserLoged()) { ?> 
       <div id="login-area">
         <form action="./include/validateForm.php" method="post">
-           <!-- //NOTE- Implement -->
+           <input type="text" name ="name" id="name" placeholder="Benutzername" required maxlength="20" autocomplete="off">
+           <input type="submit" value="weiter" name="action" id="action">
         </form>
       </div>
       <?php
@@ -82,14 +68,11 @@ echo '</script>';
     else {
       include_once "client-connecting.php";
     }
-
     
     ?>
 
 
 <div id="game" style="display: none;">
-
-    <!-- Game HTML -->
 
 </div>
 
